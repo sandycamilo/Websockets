@@ -8,7 +8,7 @@ let ws
 
 // Display messages from the websocket
 function showMessage(data) {
-  messages.innerHTML += `<li>${data.name}:${data.message}</li>` // display the message
+  messages.innerHTML += `<li>${data.name}:${data.message}\n\n${data.time}</li>` // display the message
   messages.scrollTop = messages.scrollHeight // scroll to the top
   messageInput.value = '' // clear the input field
   nameInput.value = ''
@@ -43,7 +43,8 @@ sendBtn.onclick = function () {
     return;
   }
 
-  const data = { message: messageInput.value, name: nameInput.value }
+  let time = new Date()
+  const data = { message: messageInput.value, name: nameInput.value, time: time}
   ws.send(JSON.stringify(data))
   showMessage(data);
 }
